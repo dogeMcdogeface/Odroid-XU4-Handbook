@@ -23,7 +23,7 @@ Auto fill-in tutorial commands:
 
 <table id="controlsTable"></table>
 
-<!--const data = [ [ {label: "Network SSID", fieldName: "net-ssid", placeHolder: "exampWifi623"}, {label: "Network password", fieldName: "net-pswd", placeHolder: "Passw0rd"}, ], [ {label: "Device hostname", fieldName: "net-hnme", placeHolder: "odroidXU4"}, {label: "Static ip", fieldName: "net-ip", placeHolder: "192.186.2.123/24"}, ], [ {label: "User name", fieldName: "usr-name", placeHolder: "User"}, {label: "User password", fieldName: "usr-pswd", placeHolder: "P4ssw0r8"}, ], [ {label: "Unattended-Upgrades mail", fieldName: "upd-mail", placeHolder: "your@mail.gum"}, {label: "Unattended-Upgrades Reboot Hour", fieldName: "upd-hour", placeHolder: "02:00"}, ], ];--></div>
+<!--const data = [ [ {label: "Network SSID", fieldName: "net-ssid", placeHolder: "examWifi623"}, {label: "Network password", fieldName: "net-pswd", placeHolder: "Passw0rd"}, ], [ {label: "Device hostname", fieldName: "net-hnme", placeHolder: "odroidXU4"}, {label: "Static ip", fieldName: "net-ip", placeHolder: "192.186.2.123/24"}, ], [ {label: "User name", fieldName: "usr-name", placeHolder: "User"}, {label: "User password", fieldName: "usr-pswd", placeHolder: "P4ssw0r8"}, ], [ {label: "Unattended-Upgrades mail", fieldName: "upd-mail", placeHolder: "your@mail.gum"}, {label: "Unattended-Upgrades Reboot Hour", fieldName: "upd-hour", placeHolder: "02:00"}, ], ];--></div>
 
 <div class="details"><summary>
 
@@ -52,15 +52,15 @@ Auto fill-in tutorial commands:
 
 <div class="details"><summary>
 
-## Connect to WiFi
+## Connect to Wi-Fi
 
 </summary>
 
-If you don't have access to an ethernet connection, you will need a wireless adaptor (eg. an usb dongle) to ssh into the machine.  
+If you don't have access to an ethernet connection, you will need a wireless adaptor (e.g. an usb dongle) to ssh into the machine.  
 The easiest way to interact with the machine without a network connection will be to connect a monitor and keyboard and use the terminal.  
 This guide assumes a minimal installation with no gui, but network manager installed.
 
-### Enable wifi
+### Enable Wi-Fi
 
 <pre>sudo su
 nmcli radio wifi on
@@ -277,7 +277,7 @@ Network Manager offers a tui interface:
 
 ### Command line network options
 
-> Warning: these commands will display your wifi password in the terminal, and might leak it in the command history. Use the interactive tools if possible.
+> Warning: these commands will display your Wi-Fi password in the terminal, and might leak it in the command history. Use the interactive tools if possible.
 
 Command line connection:
 
@@ -445,7 +445,7 @@ ip a |grep inet</pre>
 > <pre>inet <mark>192.168.1.111/24</mark> brd 192.168.1.255 scope global <mark>dynamic</mark> noprefixroute eth0      <--Ethernet Adapter
 > inet <mark><ins class="net-ip">YOUR IP</ins></mark> brd 192.168.1.255 scope global noprefixroute wlan0              <--Wifi Adapter</pre>
 
-> If you see a connection marked as dynamic, the IP might change unpredictably, eg after reboots, and you will not be able to ssh in until you figure out the new IP!
+> If you see a connection marked as dynamic, the IP might change unpredictably, e.g. after reboots, and you will not be able to ssh in until you figure out the new IP!
 
 Verify internet access:
 
@@ -457,7 +457,7 @@ Verify internet access:
 
 ### Set host name
 
-The system hostname is used to identify a machine in a network in a human readable format.
+The system hostname is used to identify a machine in a network in a human-readable format.
 
 View current hostname:
 
@@ -492,7 +492,7 @@ View available network managers:
 
 ### ip
 
-Shows addresses assigned to all network interfaces:
+Show addresses assigned to all network interfaces:
 
 <pre>ip a</pre>
 
@@ -1194,7 +1194,7 @@ Create a new user named <ins class="usr-name">user</ins> with sudo privileges:
 adduser <ins class="usr-name">user</ins>
 </pre>
 
-> You will be asked a few informations
+> You will be asked a few information
 >
 > <pre>Creating home directory `/home/<ins class="usr-name">user</ins>' ...
 > Copying files from `/etc/skel' ...
@@ -1218,7 +1218,7 @@ Bestow sudo privileges to the new user.
 
 ### Automated user creation
 
-> Warning, this method might display your password on the screen and leak it trough the command history.  
+> Warning, this method might display your password on the screen and leak it through the command history.  
 > Please follow the interactive method instead.
 
 Create a new user named <ins class="usr-name">user</ins>:

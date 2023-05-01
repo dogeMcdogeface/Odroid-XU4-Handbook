@@ -49,7 +49,7 @@
  <script>
         const data = [
             [
-                {label: "Network SSID", fieldName: "net-ssid", placeHolder: "exampWifi623"},
+                {label: "Network SSID", fieldName: "net-ssid", placeHolder: "examWifi623"},
                 {label: "Network password", fieldName: "net-pswd", placeHolder: "Passw0rd"},
             ],
             [
@@ -106,13 +106,13 @@
 <!----------------------------------------------- WIFI ----------------------------------------------->
 <div class="details">
     <summary>
-        <h2>Connect to WiFi</h2>
+        <h2>Connect to Wi-Fi</h2>
     </summary>
-    <p>If you don't have access to an ethernet connection, you will need a wireless adaptor (eg. an usb dongle) to ssh into the machine. <br>
+    <p>If you don't have access to an ethernet connection, you will need a wireless adaptor (e.g. an usb dongle) to ssh into the machine. <br>
     The easiest way to interact with the machine without a network connection will be to connect a monitor and keyboard and use the terminal. <br>
     This guide assumes a minimal installation with no gui, but network manager installed.</p>
 
-    <h3>Enable wifi</h3>
+    <h3>Enable Wi-Fi</h3>
 
 <pre>
 sudo su
@@ -212,7 +212,7 @@ nmcli dev wifi list  </pre>
 
 
     <h3>Command line network options</h3>
-    <blockquote class="warn"><p>Warning: these commands will display your wifi password in the terminal, and might leak it in the command history. Use the interactive tools if possible.</p></blockquote>
+    <blockquote class="warn"><p>Warning: these commands will display your Wi-Fi password in the terminal, and might leak it in the command history. Use the interactive tools if possible.</p></blockquote>
 
     <p>Command line connection:</p>
     <pre>nmcli device wifi connect <ins class="net-ssid">network_ssid</ins> password <ins class="net-pswd">network_pswd</ins></pre>
@@ -282,7 +282,7 @@ ip a |grep inet</pre>
         <pre>inet <mark>192.168.1.111/24</mark> brd 192.168.1.255 scope global <mark>dynamic</mark> noprefixroute eth0      <--Ethernet Adapter
 inet <mark><ins class="net-ip">YOUR IP</ins></mark> brd 192.168.1.255 scope global noprefixroute wlan0              <--Wifi Adapter</pre>
     </blockquote>
-    <blockquote class="warn"><p>If you see a connection marked as dynamic, the IP might change unpredictably, eg after reboots, and you will not be able to ssh in until you figure out the new IP!</p></blockquote>
+    <blockquote class="warn"><p>If you see a connection marked as dynamic, the IP might change unpredictably, e.g. after reboots, and you will not be able to ssh in until you figure out the new IP!</p></blockquote>
     <p>Verify internet access:</p>
     <pre>ping google.com</pre>
     <blockquote><pre>
@@ -293,7 +293,7 @@ inet <mark><ins class="net-ip">YOUR IP</ins></mark> brd 192.168.1.255 scope glob
 
     <h3>Set host name</h3>
 
-    <p>The system hostname is used to identify a machine in a network in a human readable format.</p>
+    <p>The system hostname is used to identify a machine in a network in a human-readable format.</p>
     <p>View current hostname:</p>
     <pre>hostname</pre>
     <blockquote> <pre>hostname odroid</pre> </blockquote>
@@ -319,7 +319,7 @@ hostname</pre>
 
 
     <h3>ip</h3>
-    <p>Shows addresses assigned to all network interfaces:</p>
+    <p>Show addresses assigned to all network interfaces:</p>
     <pre>ip a</pre>
     <p>More concise output:</p>
     <pre> ip a | grep "inet "</pre>
@@ -585,7 +585,7 @@ adduser <ins class="usr-name">user</ins>
 </pre>
 
 <blockquote>
- <p>You will be asked a few informations</p>
+ <p>You will be asked a few information</p>
 
 	<pre>Creating home directory `/home/<ins class="usr-name">user</ins>' ...
 Copying files from `/etc/skel' ...
@@ -610,7 +610,7 @@ usermod -aG sudo <ins class="usr-name">user</ins>
 
 <h3>Automated user creation</h3>
 
-<blockquote class="warn">Warning, this method might display your password on the screen and leak it trough the command history.<br>
+<blockquote class="warn">Warning, this method might display your password on the screen and leak it through the command history.<br>
 Please follow the interactive method instead.</blockquote>
 
     <p>Create a new user named
