@@ -306,7 +306,7 @@ hostname</pre>
 <!-------------------------------------------- CONNECTIONS ------------------------------------------->
 <div class="details">
     <summary>
-        <h2>Connections Information</h2>
+        <h2>Network Info</h2>
     </summary>
 
     <h3>Network Managers</h3>
@@ -525,44 +525,6 @@ hostname</pre>
 
 </div>
 
-<!--------------------------------------------- FIREWALL --------------------------------------------->
-<div class="details">
-    <summary>
-        <h2>Firewall Setup</h2>
-    </summary>
-    <pre>
-sudo su
-apt install ufw
-ufw allow OpenSSH
-ufw enable
-ufw status</pre>
-    <blockquote>
-        <p>Output:</p>
-        <pre>
-<table>
-  <thead>
-    <tr>
-      <th>To</th>
-      <th>Action</th>
-      <th>From</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>OpenSSH</td>
-      <td>ALLOW</td>
-      <td>Anywhere</td>
-    </tr>
-    <tr>
-      <td>OpenSSH (v6)</td>
-      <td>ALLOW</td>
-      <td>Anywhere (v6)</td>
-    </tr>
-  </tbody>
-</table></pre>
-    </blockquote>
-</div>
-
 
 <!-------------------------------------------- GUIDE BODY -------------------------------------------->
 <div class="details">
@@ -646,8 +608,10 @@ usermod -aG sudo <ins class="usr-name">user</ins>
 <!-------------------------------------------- SSH CONFIG -------------------------------------------->
 <div class="details">
     <summary>
-        <h2>SSH Configuration</h2>
+        <h2>Security</h2>
     </summary>
+
+    <h3>SSH Configuration</h3>
     <p>Disable root login:</p>
     <pre>sed -i 's/PermitRootLogin yes/PermitRootLogin no/g'  /etc/ssh/sshd_config</pre>
     <div>or</div>
@@ -661,6 +625,42 @@ usermod -aG sudo <ins class="usr-name">user</ins>
     <p>Restart the SSH service:</p>
     <pre>
 sudo systemctl restart sshd </pre>
+
+
+    <h3>Firewall Setup</h3>
+<blockquote class="warn">Make sure you are not logged in as root, as this will prevent remote connections to root</blockquote>
+    <pre>
+sudo su
+apt install ufw
+ufw allow OpenSSH
+ufw enable
+ufw status</pre>
+    <blockquote>
+        <p>Output:</p>
+        <pre>
+<table>
+  <thead>
+    <tr>
+      <th>To</th>
+      <th>Action</th>
+      <th>From</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>OpenSSH</td>
+      <td>ALLOW</td>
+      <td>Anywhere</td>
+    </tr>
+    <tr>
+      <td>OpenSSH (v6)</td>
+      <td>ALLOW</td>
+      <td>Anywhere (v6)</td>
+    </tr>
+  </tbody>
+</table></pre>
+    </blockquote>
+
 </div>
 <!-------------------------------------------- UPDATE OS --------------------------------------------->
 <div class="details">

@@ -476,7 +476,7 @@ hostname</pre>
 
 <div class="details"><summary>
 
-## Connections Information
+## Network Info
 
 </summary>
 
@@ -1093,9 +1093,110 @@ Iwconfig may be used to display the parameters of the network interface, and the
 
 <div class="details"><summary>
 
-## Firewall Setup
+## User Management
 
 </summary>
+
+List all users:
+
+<pre>sudo su
+cut -d: -f1 /etc/passwd</pre>
+
+### Interactive user creation
+
+Create a new user named <ins class="usr-name">user</ins> with sudo privileges:
+
+<pre>sudo su	
+adduser <ins class="usr-name">user</ins>
+</pre>
+
+> You will be asked a few information
+>
+> <pre>Creating home directory `/home/<ins class="usr-name">user</ins>' ...
+> Copying files from `/etc/skel' ...
+> New password		<---type here
+> Retype new password:	<---type here
+> passwd: password updated successfully
+> Changing the user information for gigi
+> Enter the new value, or press ENTER for the default
+>         Full Name []:
+>         Room Number []:
+>         Work Phone []:
+>         Home Phone []:
+>         Other []:
+> Is the information correct? [Y/n] y
+> </pre>
+
+Bestow sudo privileges to the new user.
+
+<pre>usermod -aG sudo <ins class="usr-name">user</ins>
+</pre>
+
+### Automated user creation
+
+> Warning, this method might display your password on the screen and leak it through the command history.  
+> Please follow the interactive method instead.
+
+Create a new user named <ins class="usr-name">user</ins>:
+
+<pre>useradd -m <ins class="usr-name">user</ins>
+  echo "<ins class="usr-name">user</ins>:<ins class="usr-pswd">pswd</ins>" | chpasswd;history -d $(history 1)
+#^ The leading space is important, don't remove 
+clear
+history | tail
+</pre>
+
+> Warning, if your password was displayed, change it immediately.
+>
+> <pre>183  useradd -m User
+> 184  "<ins class="usr-name">user</ins>:<ins class="usr-pswd">pswd</ins>" | chpasswd
+> 185  history | tail
+> </pre>
+
+Bestow sudo privileges to the new user.
+
+<pre>usermod -aG sudo <ins class="usr-name">user</ins>
+</pre>
+
+### Remove default user
+
+Delete the user "odroid" and remove their home directory:
+
+<pre>sudo deluser --remove-home odroid</pre>
+
+</div>
+
+<div class="details"><summary>
+
+## Security
+
+</summary>
+
+### SSH Configuration
+
+Disable root login:
+
+<pre>sed -i 's/PermitRootLogin yes/PermitRootLogin no/g'  /etc/ssh/sshd_config</pre>
+
+<div>or</div>
+
+<pre>sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin no/g'  /etc/ssh/sshd_config</pre>
+
+Verify that root login is disabled:
+
+<pre>cat  /etc/ssh/sshd_config | grep "PermitRootLogin "</pre>
+
+> Output:
+>
+> <pre>PermitRootLogin no</pre>
+
+Restart the SSH service:
+
+<pre>sudo systemctl restart sshd </pre>
+
+### Firewall Setup
+
+> Make sure you are not logged in as root, as this will prevent remote connections to root
 
 <pre>sudo su
 apt install ufw
@@ -1172,109 +1273,6 @@ ufw status</pre>
 > </table>
 >
 > </pre>
-
-</div>
-
-<div class="details"><summary>
-
-## User Management
-
-</summary>
-
-List all users:
-
-<pre>sudo su
-cut -d: -f1 /etc/passwd</pre>
-
-### Interactive user creation
-
-Create a new user named <ins class="usr-name">user</ins> with sudo privileges:
-
-<pre>sudo su	
-adduser <ins class="usr-name">user</ins>
-</pre>
-
-> You will be asked a few information
->
-> <pre>Creating home directory `/home/<ins class="usr-name">user</ins>' ...
-> Copying files from `/etc/skel' ...
-> New password		<---type here
-> Retype new password:	<---type here
-> passwd: password updated successfully
-> Changing the user information for gigi
-> Enter the new value, or press ENTER for the default
->         Full Name []:
->         Room Number []:
->         Work Phone []:
->         Home Phone []:
->         Other []:
-> Is the information correct? [Y/n] y
-> </pre>
-
-Bestow sudo privileges to the new user.
-
-<pre>usermod -aG sudo <ins class="usr-name">user</ins>
-</pre>
-
-### Automated user creation
-
-> Warning, this method might display your password on the screen and leak it through the command history.  
-> Please follow the interactive method instead.
-
-Create a new user named <ins class="usr-name">user</ins>:
-
-<pre>useradd -m <ins class="usr-name">user</ins>
-  echo "<ins class="usr-name">user</ins>:<ins class="usr-pswd">pswd</ins>" | chpasswd;history -d $(history 1)
-#^ The leading space is important, don't remove 
-clear
-history | tail
-</pre>
-
-> Warning, if your password was displayed, change it immediately.
->
-> <pre>183  useradd -m User
-> 184  "<ins class="usr-name">user</ins>:<ins class="usr-pswd">pswd</ins>" | chpasswd
-> 185  history | tail
-> </pre>
-
-Bestow sudo privileges to the new user.
-
-<pre>usermod -aG sudo <ins class="usr-name">user</ins>
-</pre>
-
-### Remove default user
-
-Delete the user "odroid" and remove their home directory:
-
-<pre>sudo deluser --remove-home odroid</pre>
-
-</div>
-
-<div class="details"><summary>
-
-## SSH Configuration
-
-</summary>
-
-Disable root login:
-
-<pre>sed -i 's/PermitRootLogin yes/PermitRootLogin no/g'  /etc/ssh/sshd_config</pre>
-
-<div>or</div>
-
-<pre>sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin no/g'  /etc/ssh/sshd_config</pre>
-
-Verify that root login is disabled:
-
-<pre>cat  /etc/ssh/sshd_config | grep "PermitRootLogin "</pre>
-
-> Output:
->
-> <pre>PermitRootLogin no</pre>
-
-Restart the SSH service:
-
-<pre>sudo systemctl restart sshd </pre>
 
 </div>
 
