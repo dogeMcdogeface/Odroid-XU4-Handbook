@@ -23,6 +23,8 @@ Auto fill-in tutorial commands:
 
 <table id="controlsTable"></table>
 
+</div>
+
 <div class="details"><summary>
 
 ## Flash OS
@@ -434,13 +436,63 @@ List all users:
 <pre>sudo su
 cut -d: -f1 /etc/passwd</pre>
 
+### Interactive user creation
+
 Create a new user named <ins class="usr-name">user</ins> with sudo privileges:
 
-<pre>useradd -m <ins class="usr-name">user</ins>
-echo "<ins class="usr-name">user</ins>:<ins class="usr-pswd">pswd</ins>" | chpasswd
-
-usermod -aG sudo <ins class="usr-name">user</ins>
+<pre>sudo su	
+adduser <ins class="usr-name">user</ins>
 </pre>
+
+> You will be asked a few informations
+>
+> <pre>Creating home directory `/home/<ins class="usr-name">user</ins>' ...
+> Copying files from `/etc/skel' ...
+> New password		<---type here
+> Retype new password:	<---type here
+> passwd: password updated successfully
+> Changing the user information for gigi
+> Enter the new value, or press ENTER for the default
+>         Full Name []:
+>         Room Number []:
+>         Work Phone []:
+>         Home Phone []:
+>         Other []:
+> Is the information correct? [Y/n] y
+> </pre>
+
+Bestow sudo privileges to the new user.
+
+<pre>usermod -aG sudo <ins class="usr-name">user</ins>
+</pre>
+
+### Automated user creation
+
+> Warning, this method might display your password on the screen and leak it trough the command history.  
+> Please follow the interactive method instead.
+
+Create a new user named <ins class="usr-name">user</ins>:
+
+<pre>useradd -m <ins class="usr-name">user</ins>
+  echo "<ins class="usr-name">user</ins>:<ins class="usr-pswd">pswd</ins>" | chpasswd;history -d $(history 1)
+#^ The leading space is important, don't remove 
+clear
+history | tail
+</pre>
+
+> Warning, if your password was displayed, change it immediately.
+>
+> <pre>183  useradd -m User
+> 184  "<ins class="usr-name">user</ins>:<ins class="usr-pswd">pswd</ins>" | chpasswd
+> 185  history | tail
+> </pre>
+
+Bestow sudo privileges to the new user.
+
+<pre>usermod -aG sudo <ins class="usr-name">user</ins>
+</pre>
+
+### Remove default user
 
 Delete the user "odroid" and remove their home directory:
 
@@ -835,3 +887,4 @@ INFO
 
 </div>
 
+<style>body { background-color: #111; color: #ddd; font-family: sans-serif; margin: 1px; } .container { padding-left: 2ch; margin-bottom: 3ch; } .details { border: #6b6464 1px solid; margin-bottom: 2ch; border-radius: 1ch; overflow: hidden } .details > summary { user-select: none; transition: all 0.3s; cursor: pointer; z-index: 2; border: 4px solid transparent; outline: none; background: #444; color: white; position: relative; border-radius: 1ch; margin-bottom: 1ch; display: flex; align-items: center; } .details > summary:before { content: ''; border-width: 0.5rem; margin-left: 1ch; border-style: solid; border-color: transparent transparent transparent #fff; transform: rotate(90deg); transform-origin: 25% 50%; transition: .25s transform ease; } .details.Close > summary:before { transform: rotate(0deg); } .details summary ~ *,.details summary ~ * * { transition: all 0.3s linear; margin-left: 1ch; margin-right: 1ch; opacity: 1; } .details.Close summary ~ *,.details.Close summary ~ * *{ display: block; opacity: 0; margin: 0 0 0 1ch; padding-top: 0; padding-bottom: 0; max-height: 0; overflow: hidden; line-height: 0; } .notransition > * ,.notransition > * *{ -webkit-transition: none !important; -moz-transition: none !important; -o-transition: none !important; transition: none !important; } h2 { text-align: center; display: flex; align-content: center; align-items: center; white-space: nowrap; width: 100%; } h2::before, h2::after { content: ""; height: 2px; background: white; margin: 0 2rem; width: 100%; } summary p { padding-left: 3ch; margin-top: .5ch; margin-bottom: 0.5ch; } blockquote { background: rgba(0, 99, 132, 0.31); border-left: 3px solid darkturquoise; padding: 0.1em 0.1em 0.1em 0.5em; margin-left: 0 !important; margin-right: 0 !important; } blockquote.warn{ padding: 0.5em 0.5em 0.5em 1em; background: rgba(255, 178, 89, 0.11); border-left: 3px solid #ffa142; } code { background-color: #333; color: #fff; font-family: monospace; border-radius: 0.5em; padding: 0.8ch; } pre { background-color: #333; color: #fff; font-family: monospace; padding: 1ch; overflow: auto; border-radius: 0.5em; } th, td { padding: 0.5ch 1ch 0.5ch; background: #4b4b4b; } li { margin: 0 0 1ch 0; } .toc-container ol { counter-reset: item; list-style-type: none; } .toc-container ol>li { counter-increment: item; } .toc-container ol>li::before { content: counters(item, '.') ' - '; } .toc-container a, .toc-container a:visited { color: ghostwhite; transition: color 0.2s cubic-bezier(0,.7,.07,.42) } .toc-container a:hover { color: dodgerblue; }</style>

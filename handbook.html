@@ -251,17 +251,73 @@ ufw status</pre>
     <pre>
 sudo su
 cut -d: -f1 /etc/passwd</pre>
+
+
+<h3>Interactive user creation</h3>
     <p>Create a new user named
         <ins class="usr-name">user</ins>
         with sudo privileges:
     </p>
-    <pre>
-useradd -m <ins class="usr-name">user</ins>
-echo "<ins class="usr-name">user</ins>:<ins class="usr-pswd">pswd</ins>" | chpasswd
+    <pre>sudo su	
+adduser <ins class="usr-name">user</ins>
+</pre>
 
+<blockquote>
+ <p>You will be asked a few informations</p>
+
+	<pre>Creating home directory `/home/<ins class="usr-name">user</ins>' ...
+Copying files from `/etc/skel' ...
+New password		<---type here
+Retype new password:	<---type here
+passwd: password updated successfully
+Changing the user information for gigi
+Enter the new value, or press ENTER for the default
+        Full Name []:
+        Room Number []:
+        Work Phone []:
+        Home Phone []:
+        Other []:
+Is the information correct? [Y/n] y
+</pre>
+</blockquote>
+<p>Bestow sudo privileges to the new user.</p>
+<pre>
 usermod -aG sudo <ins class="usr-name">user</ins>
 </pre>
 
+
+<h3>Automated user creation</h3>
+
+<blockquote class="warn">Warning, this method might display your password on the screen and leak it trough the command history.<br>
+Please follow the interactive method instead.</blockquote>
+
+    <p>Create a new user named
+        <ins class="usr-name">user</ins>:
+    </p>
+    <pre>
+useradd -m <ins class="usr-name">user</ins>
+  echo "<ins class="usr-name">user</ins>:<ins class="usr-pswd">pswd</ins>" | chpasswd;history -d $(history 1)
+#^ The leading space is important, don't remove 
+clear
+history | tail
+</pre>
+
+<blockquote class="warn">
+ <p>Warning, if your password was displayed, change it immediately.</p>
+
+	<pre>183  useradd -m User
+184  "<ins class="usr-name">user</ins>:<ins class="usr-pswd">pswd</ins>" | chpasswd
+185  history | tail
+</pre>
+</blockquote>
+
+<p>Bestow sudo privileges to the new user.</p>
+<pre>
+usermod -aG sudo <ins class="usr-name">user</ins>
+</pre>
+
+
+<h3>Remove default user </h3>
     <p>Delete the user "odroid" and remove their home directory:</p>
     <pre>sudo deluser --remove-home odroid</pre>
 </div>
