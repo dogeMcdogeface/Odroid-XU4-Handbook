@@ -355,7 +355,7 @@ nmcli con up "<ins class="net-ssid">network_ssid</ins>"</pre>
 >
 > </pre>
 
-### Verify your connections:
+### Verify your connections
 
 <pre>nmcli connection show
 ip a |grep inet</pre>
