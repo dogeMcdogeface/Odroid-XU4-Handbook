@@ -1084,6 +1084,10 @@ Upload: 18.60 Mbit/s
         transform: rotate(0deg);
     }
 
+    .details summary ~ * {
+        margin-left: 1ch;
+    }
+
     .details summary ~ *,.details summary ~ * * {
         transition: all 0.3s linear;
         opacity: 1;
@@ -1092,13 +1096,15 @@ Upload: 18.60 Mbit/s
     .details.Close summary ~ *,.details.Close summary ~ * *{
         display: block;
         opacity: 0;
-        margin: 0 0 0 1ch;
+        margin-top: 0;
+        margin-bottom:0;
         padding-top: 0;
         padding-bottom: 0;
         max-height: 0;
         overflow: hidden;
         line-height: 0;
     }
+
 
     .notransition > * ,.notransition > * *{
         -webkit-transition: none !important;
