@@ -834,11 +834,11 @@ Test fan speeds by covering real temperature values with emulated ones.
 
     cat /sys/devices/virtual/thermal/thermal_zone{0,1,2,3}/temp </code></pre>
 
->   <pre><code>  85000
+>   <pre><code>          85000
 >     85000
 >     85000
 >     85000
->     85000   </code></pre>
+>     85000         </code></pre>
 
 <div>Reset real temperatures</div>
 
