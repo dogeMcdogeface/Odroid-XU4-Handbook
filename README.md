@@ -833,11 +833,11 @@ Test fan speeds by covering real temperature values with emulated ones.
     echo 85000 | sudo tee /sys/devices/virtual/thermal/thermal_zone{0,1,2,3}/emul_temp
     cat /sys/devices/virtual/thermal/thermal_zone{0,1,2,3}/temp
 
->   <code>  85000
+>   <pre><code>  85000
 >     85000
 >     85000
 >     85000
->     85000   </code>
+>     85000   </code></pre>
 
 <div>Reset real temperatures</div>
 
